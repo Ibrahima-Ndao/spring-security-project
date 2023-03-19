@@ -27,4 +27,10 @@ public class PurchaseHistry {
 	
 	@Column(name = "purchaseTime", nullable = false)
 	private LocalDate purchaseTime;
+	
+	@Column(name = "user_Id", nullable = false)
+	private Long userId;
+	
+	@Column(name = "book_Id", nullable = false)
+	private Long bookId;
 }
