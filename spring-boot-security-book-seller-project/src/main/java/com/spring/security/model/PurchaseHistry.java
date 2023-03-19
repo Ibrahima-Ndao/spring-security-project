@@ -8,15 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "purchase_histry")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PurchaseHistry {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +27,56 @@ public class PurchaseHistry {
 	
 	@Column(name = "book_Id", nullable = false)
 	private Long bookId;
+
+	public PurchaseHistry() {
+	}
+
+	public PurchaseHistry(Long id, Double price, LocalDate purchaseTime, Long userId, Long bookId) {
+		this.id = id;
+		this.price = price;
+		this.purchaseTime = purchaseTime;
+		this.userId = userId;
+		this.bookId = bookId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public LocalDate getPurchaseTime() {
+		return purchaseTime;
+	}
+
+	public void setPurchaseTime(LocalDate purchaseTime) {
+		this.purchaseTime = purchaseTime;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Long getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
+	}
+	
 }
