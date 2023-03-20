@@ -21,6 +21,7 @@ public class PurchaseService implements IpurchaseHistoryService {
 		return purchaseRepository.save(purchaseHistry);
 	}
 	
+	@Override
 	public List<PurchaseHIstoryItem> findPurchaseOfUser(Long userId){
 		return purchaseRepository.findAllPurchaseOfUser(userId);
 	}
