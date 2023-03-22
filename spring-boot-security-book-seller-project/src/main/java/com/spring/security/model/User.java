@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 
 
 @Entity
@@ -24,6 +26,9 @@ public class User {
 	@Column(name = "username", unique = true, nullable = false)
 	private String username;
 	
+	@Column(name = "name", nullable = false)
+	private String name;
+	
 	@Column(name = "password", nullable = false)
 	private String password;
 	
@@ -33,7 +38,9 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Role", nullable = false)
 	private Role role;
-
+	
+	@Transient
+	private String token;
 	public User() {
 	}
 
@@ -51,6 +58,22 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public String getUsername() {

@@ -1,28 +1,33 @@
 package com.spring.security.util;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.util.StringUtils;
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+public class SecurityUtil
+{
+    public static final String ROLE_PREFIX = "ROLE_";
+    public static final String AUTH_HEADER = "authorization";
+    public static final String AUTH_TOKEN_TYPE = "Bearer";
+    public static final String AUTH_TOKEN_PREFIX = AUTH_TOKEN_TYPE + " ";
 
+    public static SimpleGrantedAuthority convertToGrantedAuthority(String role)
+    {
+        String formattedRole = role.startsWith(ROLE_PREFIX) ? role : ROLE_PREFIX + role;
 
+        return new SimpleGrantedAuthority(formattedRole);
+    }
 
+    public static String extractToken(HttpServletRequest request)
+    {
+        String bearerToken = request.getHeader(AUTH_HEADER);
 
-public class SecurityUtil {
-	public static final String ROLE_PREFIX = "ROLE_";
-	public static final String AUTH = "authorization";
-	public static final String AUTH_TYPE = "bearer";
-	public static final String PREFIX_AUTH_TYPE = AUTH_TYPE + " ";
-	
-	public static SimpleGrantedAuthority convertToGrantedAuthority(String role) {
-		String ROLE_FORMATTED = role.startsWith(ROLE_PREFIX)?role:ROLE_PREFIX + role;
-		return new SimpleGrantedAuthority(ROLE_FORMATTED);
-	}
-	
-	public static String extractToken(HttpServletRequest request) {
-		String bearerToken = request.getHeader(AUTH);
-		if(bearerToken.length() > 0 && !bearerToken.trim().isBlank() && bearerToken.startsWith(PREFIX_AUTH_TYPE)) {
-			return bearerToken.substring(7);
-		}
-		return null;
-	}
+        if (StringUtils.hasLength(bearerToken) && bearerToken.startsWith(AUTH_TOKEN_PREFIX))
+        {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
 }
+

@@ -20,7 +20,7 @@ public class UserService implements IuserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
+	//@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Override
