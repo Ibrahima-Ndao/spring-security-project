@@ -17,10 +17,10 @@ public class PersonDie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String defunctName;
-    private String gender;
+    private String sexe;
     private LocalDateTime dateOfDie;
-    private String code_ref;
+    private String codeRef;
     private String lieu;
-    @Column(name = "card_number", unique = true, nullable = false, length = 12)
+    @Column(name = "card_number", unique = true, nullable = false, length = 13)
     private String card_number;
 }

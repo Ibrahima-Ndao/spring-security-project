@@ -6,16 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class PersonDiedto {
     private Long id;
     private String defunctName;
-    private String gender;
+    private String sexe;
     private String dateOfDie;
-    private String code_ref;
+    private String codeRef;
     private String lieu;
     private String card_number;
 }

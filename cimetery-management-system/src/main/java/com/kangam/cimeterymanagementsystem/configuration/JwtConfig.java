@@ -1,10 +1,12 @@
 package com.kangam.cimeterymanagementsystem.configuration;
 
 import com.kangam.cimeterymanagementsystem.jwt.JwtAuthorizationFilter;
+import com.kangam.cimeterymanagementsystem.model.Role;
 import com.kangam.cimeterymanagementsystem.security.CustomerUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,8 +35,13 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
        http.cors();
        http.csrf().disable();
        http.authorizeRequests()
+               .antMatchers(HttpMethod.GET, "/api/personDie/**").permitAll()
+               .antMatchers("/api/personDie/**").hasRole(Role.ADMIN.name())
                .antMatchers("/api/sign_Up/**").permitAll()
                .antMatchers("/api/sign_In/**").permitAll()
+               .antMatchers(HttpMethod.POST,"/api/declaration").permitAll()
+               .antMatchers(HttpMethod.GET, "/api/declaration/**").permitAll()
+               .antMatchers("/api/declaration/**").hasRole(Role.ADMIN.name())
                .anyRequest().authenticated();
        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
        http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
